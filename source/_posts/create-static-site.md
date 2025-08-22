@@ -1,13 +1,11 @@
 ---
-layout: create
-title: create-static-site
+title: 搭建 Hexo + GitHub 网站指南
 date: 2025-08-22 10:42:27
 tags:
   - hexo
   - github pages
 ---
 
-# 搭建 Hexo + GitHub 网站指南新人指南
 ## 1. 前期准备
 
 1. 安装 [Node.js](https://nodejs.org/) (包含 npm)
@@ -36,7 +34,7 @@ tags:
    hexo server
    ```
 
-   访问 `http://localhost:4000` (默认端口为4000) 查看效果, 默认有一个hello world 默认博客
+   访问 `http://localhost:4000` (默认端口为4000) 查看效果， 默认有一个hello world 默认博客
   
 ## 3. 配置 GitHub Pages
 
@@ -113,5 +111,5 @@ tags:
 ![github-setting](github-setting.png)
 修改这个source为`GitHub Actions`
 
-4. 提交代码, 部署完成之后, 即可前往 `username.github.io` 查看网页。
+4. 提交代码， 部署完成之后， 即可前往 `username.github.io` 查看网页。
 
