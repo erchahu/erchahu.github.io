@@ -54,7 +54,7 @@ marked:
 ```
 
 启用后，资源图片将会被自动解析为其对应文章的路径。 
-例如： image.jpg 位置为 /2020/01/02/foo/image.jpg ，这表示它是 /2020/01/02/foo/ 文章的一张资源图片， ![](image.jpg) 将会被解析为 <img src="/2020/01/02/foo/image.jpg"> 。
+例如： image.jpg 位置为 /2020/01/02/foo/image.jpg ，这表示它是 /2020/01/02/foo/ 文章的一张资源图片， `![](image.jpg)` 将会被解析为 `<img src="/2020/01/02/foo/image.jpg">` 。
 
 启用后使用图片示例
 ![example](assets-eg.png)
@@ -78,4 +78,4 @@ git clone -b main https://github.com/anzhiyu-c/hexo-theme-anzhiyu.git themes/anz
 如果没有 `pug` 以及 `stylus` 的渲染器，请下载安装： `npm install hexo-renderer-pug hexo-renderer-stylus --save`
 
 完成之后请重新启动服务
-![theme](them.png)
+![theme](theme.png)
