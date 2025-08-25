@@ -18,7 +18,7 @@ menu:
   关于:
     关于本人: /about/ || anzhiyu-icon-paper-plane
     闲言碎语: /essay/ || anzhiyu-icon-lightbulb
-    随便逛逛: javascript:toRandomPost() || anzhiyu-icon-shoe-prints1
+    # 随便逛逛: javascript:toRandomPost() || anzhiyu-icon-shoe-prints1
 
 # nav相关配置
 nav:
@@ -140,7 +140,6 @@ favicon: /imgs/favicon.ico
 
 # Avatar (头像)
 avatar:
-  # img: https://bu.dusays.com/2023/04/27/64496e511b09c.jpg
   img: /imgs/config/author.jpg
   effect: false
 
@@ -428,7 +427,7 @@ crisp:
 footer:
   owner:
     enable: true
-    since: 2020
+    since: 2025
   custom_text:
   runtime:
     enable: false
@@ -861,7 +860,7 @@ busuanzi:
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
   enable: true
-  publish_date: 4/1/2021 00:00:00
+  publish_date: 8/22/2025 00:00:00
 
 # Console - Newest Comments
 newest_comments:
