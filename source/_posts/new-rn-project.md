@@ -77,6 +77,56 @@ const App = () => {
 使用前后对比
 ![safe-area](safe-area.png)
 
-详细使用请查阅博客: [react-native-safe-area-context使用教程](/2025/08/28/react-native-safe-area-context/)
+4. 详细使用请查阅博客: [react-native-safe-area-context使用教程](/2025/08/28/react-native-safe-area-context/)
 
 ### 4.2 添加 styled-components
+1. 官方地址 - [styled-components](https://styled-components.com/)
+
+2. 安装依赖:
+
+```bash
+npm install styled-components
+
+# 或者
+yarn add styled-components
+```
+
+3. 简单使用示例
+
+```tsx
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import styled from 'styled-components/native';
+
+const StyledView = styled(SafeAreaView)`
+  flex: 1;
+  background-color: #F00;
+`;
+
+const StyledContentView = styled.View`
+  flex: 1;
+  background-color: blue;
+`;
+
+const StyledText = styled.Text`
+  font-size: 20px;
+  line-height: 40px;
+  color: aliceblue;
+`;
+
+const App = () => {
+  return (
+    <StyledView>
+      <StyledContentView>
+        <StyledText>你好</StyledText>
+      </StyledContentView>
+    </StyledView>
+  );
+};
+
+export default App;
+
+```
+
+4. 详细使用请查阅博客: [react native 中 styled-components使用教程](/2025/08/30/rn-styled-components/)
