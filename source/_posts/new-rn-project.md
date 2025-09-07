@@ -130,3 +130,96 @@ export default App;
 ```
 
 4. 详细使用请查阅博客: [react native 中 styled-components使用教程](/2025/08/30/rn-styled-components/)
+
+## 5. 配置项目别名
+
+### 5.1 安装必要依赖
+```
+npm install --save-dev babel-plugin-module-resolver
+# 或者
+yarn add --dev babel-plugin-module-resolver
+```
+
+### 5.2 配置 babel.config.js
+```js
+module.exports = {
+  plugins: [
+    'react-native-worklets/plugin',
+    [
+      'module-resolver',
+      {
+        root: ['./src'],
+        extensions: [
+          '.ios.ts',
+          '.android.ts',
+          '.ts',
+          '.ios.tsx',
+          '.android.tsx',
+          '.tsx',
+          '.jsx',
+          '.js',
+          '.json',
+        ],
+        alias: {
+          '@': './src',
+          '@assets': './src/assets',
+          '@images': './src/assets/images',
+          '@fonts': './src/assets/fonts',
+          '@animations': './src/assets/animations',
+          '@components': './src/components',
+          '@hooks': './src/hooks',
+          '@locale': './src/locale',
+          '@navigation': './src/navigation',
+          '@screens': './src/screens',
+          '@services': './src/services',
+          '@store': './src/store',
+          '@theme': './src/theme',
+          '@types': './src/types',
+          '@utils': './src/utils',
+        },
+      },
+    ],
+  ],
+};
+
+```
+
+### 5.2 配置 tsconfig.json 设置别名
+> 用来给 .ts 和 .tsx 引入文件的时候解析路径别名使用。
+
+```json
+{
+  "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"],
+  "typeRoots": ["./src/types"],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@fonts/*": ["src/assets/fonts/*"],
+      "@animations/*": ["src/assets/animations/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@locale/*": ["src/locale/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@screens/*": ["src/screens/*"],
+      "@services/*": ["src/services/*"],
+      "@store/*": ["src/store/*"],
+      "@theme/*": ["src/theme/*"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+    },
+  }
+}
+
+```
+
+### 5.3 使用
+
+```tsx
+import { images } from "@assets/images";
+```
