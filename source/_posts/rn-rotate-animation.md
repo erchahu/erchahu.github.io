@@ -2,7 +2,7 @@
 title: 实现图片绕中心匀速旋转
 date: 2025-09-18 21:03:51
 tags:
-- react-natiev
+- react-native
 ---
 
 ## 1. 技术实现
