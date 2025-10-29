@@ -117,11 +117,13 @@ const StyledText = styled.Text`
 
 const App = () => {
   return (
-    <StyledView>
-      <StyledContentView>
-        <StyledText>你好</StyledText>
-      </StyledContentView>
-    </StyledView>
+    <SafeAreaProvider>
+      <StyledView>
+        <StyledContentView>
+          <StyledText>你好</StyledText>
+        </StyledContentView>
+      </StyledView>
+    </SafeAreaProvider>
   );
 };
 
@@ -130,6 +132,8 @@ export default App;
 ```
 
 4. 详细使用请查阅博客: [react native 中 styled-components使用教程](/2025/08/30/rn-styled-components/)
+
+### 4.3 添加 多语言 react-i18next
 
 ## 5. 配置项目别名
 
@@ -223,3 +227,21 @@ module.exports = {
 ```tsx
 import { images } from "@assets/images";
 ```
+
+
+## 6. 配置 tsconfig.json
+
+### 6.1 ts 相关bug
+
+```json
+Module '"/**/node_modules/@types/react/index"' can only be default-imported using the 'esModuleInterop' flag
+```
+
+设置:
+```tsconfig.json
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
