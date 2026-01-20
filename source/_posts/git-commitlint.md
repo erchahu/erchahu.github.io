@@ -68,7 +68,6 @@ module.exports = {
   },
 };
 ```
-要使用 commitlint，需要设置 commit-msg 钩子。
 
 **要使用 commitlint，需要设置 commit-msg 钩子.**
 
