@@ -33,4 +33,5 @@ yarn-error.log*
 *.tmp
 
 # VitePress
-.vitepress/cache/
+**/.vitepress/cache/
+**/.vitepress/dist/
