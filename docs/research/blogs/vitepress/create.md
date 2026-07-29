@@ -43,6 +43,107 @@ yarn vitepress init
 打包命令: `yarn build`
 打包后预览: `yarn preview`
 
+### [页面配置]
+
+参考文档：[默认主题配置](https://vitepress.dev/zh/reference/default-theme-config)
+
+在 `themeConfig` 中可配置以下页面相关选项：
+
+```ts
+themeConfig: {
+  // Logo（支持浅色/深色模式）
+  logo: '/logo.jpg',
+  // 或使用不同 logo：
+  // logo: { light: '/logo-light.jpg', dark: '/logo-dark.jpg' }
+
+  // 站点标题（覆盖默认 title）
+  // siteTitle: '我的博客',
+
+  // 导航菜单
+  nav: [
+    { text: 'Home', link: '/' },
+    { text: 'Dropdown', items: [
+      { text: 'Item A', link: '/a' },
+      { text: 'Item B', link: '/b' }
+    ]}
+  ],
+
+  // 侧边栏
+  sidebar: {
+    '/': [
+      {
+        text: '指南',
+        items: [
+          { text: '首页', link: '/' },
+          { text: '开始', link: '/guide/getting-started' }
+        ]
+      }
+    ]
+  },
+
+  // 页脚
+  footer: {
+    message: 'Released under the MIT License.',
+    copyright: 'Copyright © 2024-present Your Name'
+  },
+
+  // 编辑链接
+  editLink: {
+    pattern: 'https://github.com/username/repo/edit/main/docs/:path',
+    text: '在 GitHub 上编辑此页'
+  },
+
+  // 最后更新
+  lastUpdated: {
+    text: '最后更新',
+    formatOptions: {
+      dateStyle: 'long',
+      timeStyle: 'short'
+    }
+  },
+
+  // 页面导航文本（上一页/下一页）
+  docFooter: {
+    prev: '上一页',
+    next: '下一页'
+  },
+
+  // 大纲（右侧目录）
+  outline: {
+    level: [2, 3],  // 显示 h2 和 h3
+    label: '页面导航'
+  },
+
+  // 外部链接图标
+  externalLinkIcon: true,
+
+  // 社交链接
+  socialLinks: [
+    { icon: 'github', link: 'https://github.com/your-username' },
+    { icon: 'twitter', link: 'https://twitter.com/your-username' }
+  ],
+
+  // 移动端标签
+  menuLabel: '菜单',
+  returnToTopLabel: '返回顶部',
+  darkModeSwitchLabel: '外观',
+  langMenuLabel: '语言'
+}
+```
+
+#### 在页面中覆盖配置
+
+每个页面的 frontmatter 可以覆盖部分配置：
+
+```yaml
+---
+outline: [2, 4]      # 只显示 h2 和 h4
+outlineLabel: '目录'
+lastUpdated: false   # 禁用最后更新
+editLink: false      # 禁用编辑链接
+---
+```
+
 ### [Theme]使用Theme · 以 fuxishi-vitepress-theme 为例
 **安装**
 ```bash
@@ -98,8 +199,6 @@ export default defineConfigWithTheme<FxThemeConfig>(defaultConfig)
 
 #### Theme list
 - [fuxishi-vitepress-theme](https://fuxishi-vitepress-theme.fuxizjxzy.cn/)
-
-### [页面配置]
 
 修改`.vitepress/config.mts`中的 `defaultConfig`:
 
