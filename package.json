@@ -9,6 +9,7 @@
     "preview": "vitepress preview docs"
   },
   "dependencies": {
-    "@fuxishi/vitepress-theme": "^1.0.14"
+    "@fuxishi/vitepress-theme": "^1.0.14",
+    "vitepress-sidebar": "^1.36.1"
   }
 }

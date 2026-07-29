@@ -33,10 +33,10 @@ yarn vitepress init
 ```
 
 > 需要回答几个简单的问题：
-![FAQ](image.png)
+<img src="./image.png" alt="FAQ" width="50%">
 
 > 项目启动: `yarn run dev`, 启动效果
-![start](image-1.png)
+<img src="./image-1.png" alt="start" width="50%">
 
 ---
 关于本地部署:
@@ -121,13 +121,7 @@ themeConfig: {
   socialLinks: [
     { icon: 'github', link: 'https://github.com/your-username' },
     { icon: 'twitter', link: 'https://twitter.com/your-username' }
-  ],
-
-  // 移动端标签
-  menuLabel: '菜单',
-  returnToTopLabel: '返回顶部',
-  darkModeSwitchLabel: '外观',
-  langMenuLabel: '语言'
+  ]
 }
 ```
 
@@ -195,15 +189,121 @@ const defaultConfig = {
 export default defineConfigWithTheme<FxThemeConfig>(defaultConfig)
 
 ```
-![theme](image-2.png)
+<img src="./image-2.png" alt="theme" width="50%">
+
+
 
 #### Theme list
 - [fuxishi-vitepress-theme](https://fuxishi-vitepress-theme.fuxizjxzy.cn/)
+- [vitepress-blogs-theme](https://chunge16.github.io/vitepress-blogs-theme/)
+- [duxweb](https://duxweb.github.io/vitepress-theme)
+- [catppuccin](https://vitepress.catppuccin.com/)
+- [sugarat](https://theme.sugarat.top/en/)
 
-修改`.vitepress/config.mts`中的 `defaultConfig`:
+### [自动侧边栏] vitepress-sidebar
+
+[vitepress-sidebar](https://github.com/jooy2/vitepress-sidebar) 可以自动根据文件结构生成侧边栏。
+
+**安装**
+```bash
+npm install vitepress-sidebar
+```
+
+**使用**
+```ts
+import { withSidebar } from "vitepress-sidebar"
+
+const config = defineConfig({ /* ... */ })
+
+export default withSidebar(config, [
+  {
+    documentRootPath: '/docs',           // 文档根目录
+    scanStartPath: 'research/blogs',     // 扫描起始路径
+    resolvePath: '/research/blogs/',     // 解析路径
+    useTitleFromFrontmatter: true,        // 从 frontmatter 获取标题
+    useTitleFromFileHeading: true,        // 从文件标题获取
+    collapsed: false,                     // 是否默认折叠
+  },
+])
+```
+
+**配置选项**
+| 选项 | 说明 |
+|------|------|
+| `documentRootPath` | 文档根目录路径 |
+| `scanStartPath` | 从哪个目录开始扫描 |
+| `resolvePath` | URL 解析路径 |
+| `useTitleFromFrontmatter` | 从 frontmatter 的 `title` 获取标题 |
+| `useTitleFromFileHeading` | 从文件的第一个 `#` 标题获取 |
+| `collapsed` | 侧边栏组是否默认折叠 |
+
+### [完整配置示例]
+
+结合所有配置，完整的 `.vitepress/config.mts` 示例：
+
+```ts
+import { defineConfigWithTheme } from "vitepress"
+import fxConfig from "@fuxishi/vitepress-theme/config"
+import type { FxThemeConfig } from "@fuxishi/vitepress-theme/config"
+import { withSidebar } from "vitepress-sidebar"
+
+const vitepressConfig = defineConfigWithTheme<FxThemeConfig>({
+  title: "贰茶のBlog ~ Coding everywhere",
+  description: "Welcome to Recho's Blog",
+  extends: fxConfig,
+  head: [["link", { rel: "icon", href: "/logo.jpg" }]],
+  themeConfig: {
+    nav: [
+      { text: "Home", link: "/" },
+      { text: "Tools And Skills", link: "/nav/tools" },
+      { text: "Projects", link: "/nav/projects" },
+      { text: "Profile", link: "/nav/profile" },
+    ],
+
+    socialLinks: [
+      { icon: "github", link: "https://github.com/your-username" },
+      { icon: "gitee", link: "https://gitee.com/your-username" },
+    ],
+
+    footer: {
+      message: "Released under the MIT License.",
+      copyright: "Copyright © 2019-present Your Name",
+    },
+
+    editLink: {
+      pattern: "https://github.com/your-username/your-repo/edit/main/docs/:path",
+      text: "在 GitHub 上编辑此页",
+    },
+
+    lastUpdated: {
+      text: "最后更新",
+      formatOptions: { dateStyle: "long", timeStyle: "short" },
+    },
+
+    docFooter: { prev: "上一页", next: "下一页" },
+    outline: { level: [2, 3], label: "页面导航" },
+    externalLinkIcon: true,
+    returnToTopLabel: "返回顶部",
+  },
+})
+
+export default withSidebar(vitepressConfig, [
+  {
+    documentRootPath: '/docs',
+    scanStartPath: 'research/blogs',
+    resolvePath: '/research/blogs/',
+    useTitleFromFrontmatter: true,
+    useTitleFromFileHeading: true,
+    collapsed: false,
+  },
+])
+```
 
 
 
 ## 参考链接
 [VitePress](https://vitepress.dev/)
+
 [fuxishi-vitepress-theme](https://fuxishi-vitepress-theme.fuxizjxzy.cn/)
+
+[vitepress-sidebar](https://github.com/jooy2/vitepress-sidebar)
