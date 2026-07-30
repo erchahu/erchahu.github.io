@@ -377,13 +377,30 @@ themeConfig: {
 
 ### base 路径说明
 
-若站点部署在子路径（如 GitHub Pages：`https://username.github.io/blogs/`），需在配置中设置：
+若站点挂在子路径（如 `https://username.github.io/blogs/`），需在配置中设置：
 
 ```ts
 base: '/blogs/',
 ```
 
-本地 `blog:dev` / `blog:preview` 也会使用该 base，因此访问地址都要带 `/blogs/` 前缀。若部署在域名根路径，将 `base` 改为 `'/'` 即可。
+本地 `blog:dev` / `blog:preview` 也会使用该 base，访问地址需带 `/blogs/` 前缀。若部署在域名根路径，将 `base` 改为 `'/'` 即可。
+
+注意：`username.github.io` 这类用户站仓库，GitHub Pages 始终把 artifact **挂在站点根路径**。仅设置 `base: '/blogs/'` 不够——构建产物实际在 `/assets/...`，页面却去请求 `/blogs/assets/...`，会整站资源 404。
+
+CI 里需要把 `docs/.vitepress/dist` 嵌进 `blogs/` 再上传，例如：
+
+```yaml
+- name: Prepare /blogs deploy structure
+  run: |
+    mkdir -p docs/.vitepress/pages-root/blogs
+    cp -a docs/.vitepress/dist/. docs/.vitepress/pages-root/blogs/
+- name: Upload artifact
+  uses: actions/upload-pages-artifact@v3
+  with:
+    path: docs/.vitepress/pages-root
+```
+
+这样线上才会是 `https://username.github.io/blogs/`。
 
 ## 参考链接
 [VitePress](https://vitepress.dev/)

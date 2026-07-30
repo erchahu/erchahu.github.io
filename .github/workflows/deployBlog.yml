@@ -47,10 +47,28 @@ jobs:
         run:  yarn install # 或 pnpm install / yarn install / bun install
       - name: Build with VitePress
         run: yarn blog:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
+      # user.github.io 仓库部署在站点根路径；base 为 /blogs/ 时，
+      # 需把构建产物嵌到 blogs/ 子目录，否则静态资源会 404
+      - name: Prepare /blogs deploy structure
+        run: |
+          rm -rf docs/.vitepress/pages-root
+          mkdir -p docs/.vitepress/pages-root/blogs
+          cp -a docs/.vitepress/dist/. docs/.vitepress/pages-root/blogs/
+          printf '%s\n' \
+            '<!DOCTYPE html>' \
+            '<html lang="zh-CN"><head>' \
+            '<meta charset="utf-8">' \
+            '<meta http-equiv="refresh" content="0;url=/blogs/">' \
+            '<link rel="canonical" href="/blogs/">' \
+            '<title>Redirecting…</title>' \
+            '</head><body>' \
+            '<p>Redirecting to <a href="/blogs/">/blogs/</a>…</p>' \
+            '</body></html>' \
+            > docs/.vitepress/pages-root/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/.vitepress/dist
+          path: docs/.vitepress/pages-root
 
   # 部署工作
   deploy:

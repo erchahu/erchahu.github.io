@@ -10,6 +10,7 @@ const vitepressConfig = defineConfigWithTheme<FxThemeConfig>({
   description: "Welcome to Recho's Blog",
   extends: fxConfig,
   head: [["link", { rel: "icon", href: "favicon.ico" }]],
+  // 站点挂载在 https://erchahu.github.io/blogs/；CI 会把产物嵌到 blogs/ 子目录再上传
   base: '/blogs/',
   themeConfig: {
     logo: '/logo.jpg',

@@ -35,3 +35,4 @@ yarn-error.log*
 # VitePress
 **/.vitepress/cache/
 **/.vitepress/dist/
+**/.vitepress/pages-root/
