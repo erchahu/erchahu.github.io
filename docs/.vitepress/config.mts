@@ -9,8 +9,10 @@ const vitepressConfig = defineConfigWithTheme<FxThemeConfig>({
   title: "贰茶のBlog ~ Coding everywhere",
   description: "Welcome to Recho's Blog",
   extends: fxConfig,
-  head: [["link", { rel: "icon", href: "/logo.jpg" }]],
+  head: [["link", { rel: "icon", href: "favicon.ico" }]],
+  base: '/blogs/',
   themeConfig: {
+    logo: '/logo.jpg',
     nav: [
       { text: "Home", link: "/" },
       { text: "Tools And Skills", link: "/nav/tools" },

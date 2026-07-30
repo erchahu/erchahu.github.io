@@ -4,9 +4,9 @@
     "vue": "^3.5.40"
   },
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "blog:dev": "vitepress dev docs --port 30112",
+    "blog:build": "vitepress build docs",
+    "blog:preview": "vitepress preview docs --port 30113"
   },
   "dependencies": {
     "@fuxishi/vitepress-theme": "^1.0.14",

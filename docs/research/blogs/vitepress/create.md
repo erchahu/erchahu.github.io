@@ -35,13 +35,10 @@ yarn vitepress init
 > 需要回答几个简单的问题：
 <img src="./image.png" alt="FAQ" width="50%">
 
-> 项目启动: `yarn run dev`, 启动效果
+> 项目启动: `yarn blog:dev`, 启动效果
 <img src="./image-1.png" alt="start" width="50%">
 
 ---
-关于本地部署:
-打包命令: `yarn build`
-打包后预览: `yarn preview`
 
 ### [页面配置]
 
@@ -251,8 +248,11 @@ const vitepressConfig = defineConfigWithTheme<FxThemeConfig>({
   title: "贰茶のBlog ~ Coding everywhere",
   description: "Welcome to Recho's Blog",
   extends: fxConfig,
-  head: [["link", { rel: "icon", href: "/logo.jpg" }]],
+  head: [["link", { rel: "icon", href: "favicon.ico" }]],
+  // GitHub Pages 子路径部署时需要设置 base，本地预览也会走该路径
+  base: '/blogs/',
   themeConfig: {
+    logo: '/logo.jpg',
     nav: [
       { text: "Home", link: "/" },
       { text: "Tools And Skills", link: "/nav/tools" },
@@ -289,8 +289,8 @@ const vitepressConfig = defineConfigWithTheme<FxThemeConfig>({
 
 export default withSidebar(vitepressConfig, [
   {
-    documentRootPath: '/docs',
-    scanStartPath: 'research/blogs',
+    documentRootPath: '/docs/research',
+    scanStartPath: 'blogs',
     resolvePath: '/research/blogs/',
     useTitleFromFrontmatter: true,
     useTitleFromFileHeading: true,
@@ -299,11 +299,94 @@ export default withSidebar(vitepressConfig, [
 ])
 ```
 
+## [Deploy] 部署
 
+### 本地开发
+
+在项目根目录的 `package.json` 中配置脚本：
+
+```json
+{
+  "scripts": {
+    "blog:dev": "vitepress dev docs --port 30112",
+    "blog:build": "vitepress build docs",
+    "blog:preview": "vitepress preview docs --port 30113"
+  }
+}
+```
+
+启动本地开发服务器（热更新）：
+
+```bash
+yarn blog:dev
+# 或 npm run blog:dev
+```
+
+浏览器访问：`http://localhost:30112/blogs/`（因配置了 `base: '/blogs/'`，路径需带上 base）
+
+### 本地打包与预览
+
+> 本地「部署」指：先构建静态产物，再用预览服务模拟线上访问。
+
+**1. 构建静态站点**
+
+```bash
+yarn blog:build
+```
+
+产物默认输出到 `docs/.vitepress/dist/`。
+
+**2. 本地预览构建结果**
+
+```bash
+yarn blog:preview
+```
+
+浏览器访问：`http://localhost:30113/blogs/`
+
+> `blog:dev` 适合日常写文档；`blog:build` + `blog:preview` 用于验证打包后的真实效果（含 base 路径、静态资源是否正确）。
+
+### 静态资源（public）
+
+VitePress 会把 `docs/public/` 下的文件原样复制到构建产物根目录。
+
+建议目录结构：
+
+```text
+docs/
+├── public/
+│   ├── favicon.ico    # 站点图标
+│   └── logo.jpg       # Logo（themeConfig.logo / 页面引用）
+├── .vitepress/
+│   └── config.mts
+└── index.md
+```
+
+配置示例：
+
+```ts
+head: [["link", { rel: "icon", href: "favicon.ico" }]],
+base: '/blogs/',
+themeConfig: {
+  logo: '/logo.jpg',
+}
+```
+
+- `logo`、页面中的图片路径以 `/` 开头时，会相对于 `base` 解析（例如最终为 `/blogs/logo.jpg`）
+- `favicon.ico`、`logo.jpg` 务必放在 `docs/public/`，不要放在 `docs/` 根目录，否则构建后可能无法访问
+
+### base 路径说明
+
+若站点部署在子路径（如 GitHub Pages：`https://username.github.io/blogs/`），需在配置中设置：
+
+```ts
+base: '/blogs/',
+```
+
+本地 `blog:dev` / `blog:preview` 也会使用该 base，因此访问地址都要带 `/blogs/` 前缀。若部署在域名根路径，将 `base` 改为 `'/'` 即可。
 
 ## 参考链接
 [VitePress](https://vitepress.dev/)
-
 [fuxishi-vitepress-theme](https://fuxishi-vitepress-theme.fuxizjxzy.cn/)
 
 [vitepress-sidebar](https://github.com/jooy2/vitepress-sidebar)
