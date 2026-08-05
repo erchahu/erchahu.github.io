@@ -82,11 +82,19 @@ export default withSidebar(
     },
     {
       documentRootPath: '/docs/research',
+      scanStartPath: 'react-native',
+      resolvePath: '/research/react-native/',
+      useTitleFromFileHeading: true,
+      collapsed: true,
+    },
+    {
+      documentRootPath: '/docs/research',
       scanStartPath: 'algorithm',
       resolvePath: '/research/algorithm/',
       useTitleFromFrontmatter: true,
       collapsed: true,
     },
+
     // {
     //   documentRootPath: '/docs/research',
     //   scanStartPath: 'swift',

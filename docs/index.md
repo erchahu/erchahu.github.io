@@ -20,6 +20,11 @@ features:
     link: /research/flutter
     linkText: 查看专栏
     icon: 🚀
+  - title: ⚛️ React Native 知识库
+    details: 持续更新 RN 相关内容：学习笔记、项目实战与踩坑记录
+    link: /research/react-native
+    linkText: 查看知识库
+    icon: 📗
   - title: 📊 数据结构与算法
     details: 每日刷题记录，分类整理解题思路，分享题解笔记与面试高频题解析； 系统学习 DSA 核心知识，夯实编程基础，提升代码质量与思维逻辑
     link: /research/algorithm
